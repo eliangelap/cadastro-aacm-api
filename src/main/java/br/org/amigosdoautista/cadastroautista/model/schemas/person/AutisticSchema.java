@@ -1,29 +1,53 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.person;
 
-import br.org.amigosdoautista.cadastroautista.model.schemas.person.id.AutisticID;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-// @IdClass(AutisticID.class)
 @Table(name = "pes_autista")
 public class AutisticSchema {
 
     @Id
-    @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_autista"), name = "id_pessoa", referencedColumnName = "id_pessoa")
-    private IndividualEntitySchema person;
+    @Column(name = "id_autista")
+    @SequenceGenerator(name = "autista_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer idAutistic;
+
+    @Id
+    @OneToOne(optional = false)
+    @JoinColumn(name = "id_pessoafisica", referencedColumnName = "id_pessoafisica", foreignKey = @ForeignKey(name = "fk_pessoafisica_autista"))
+    private IndividualEntitySchema individualEntity;
 
     @OneToOne(optional = true)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_responsavel"), name = "id_responsavel", referencedColumnName = "id_pessoa")
+    @JoinColumns(value = {
+            @JoinColumn(name = "id_pessoamae", referencedColumnName = "id_pessoa"),
+            @JoinColumn(name = "id_mae", referencedColumnName = "id_pessoafisica")
+    }, foreignKey = @ForeignKey(name = "fk_pessoafisica_mae"))
+    private IndividualEntitySchema motherPerson;
+
+    @OneToOne(optional = true)
+    @JoinColumns(value = {
+            @JoinColumn(name = "id_pessoapai", referencedColumnName = "id_pessoa"),
+            @JoinColumn(name = "id_pai", referencedColumnName = "id_pessoafisica")
+    }, foreignKey = @ForeignKey(name = "fk_pessoafisica_pai"))
+    private IndividualEntitySchema fatherPerson;
+
+    @OneToOne(optional = true)
+    @JoinColumns(value = {
+            @JoinColumn(name = "id_pessoaresponsavel", referencedColumnName = "id_pessoa"),
+            @JoinColumn(name = "id_responsavel", referencedColumnName = "id_pessoafisica")
+    }, foreignKey = @ForeignKey(name = "fk_pessoafisica_responsavel"))
     private IndividualEntitySchema guardianPerson;
 
 }

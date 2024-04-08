@@ -11,6 +11,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class AttachmentSchema {
 
     @Id
     @Column(name = "id_anexo")
+    @SequenceGenerator(name = "anexo_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idAttachment;
 

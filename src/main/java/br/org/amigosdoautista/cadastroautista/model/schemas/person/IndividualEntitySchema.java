@@ -10,10 +10,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
@@ -27,7 +29,12 @@ import lombok.Data;
 public class IndividualEntitySchema implements Serializable {
 
     @Id
-    @ManyToOne(optional = false)
+    @Column(name = "id_pessoafisica")
+    @SequenceGenerator(name = "pessoafisica_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer idIndividualEntity;
+
+    @OneToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoa_pessoafisica"), name = "id_pessoa", referencedColumnName = "id_pessoa")
     private PersonSchema person;
 
@@ -43,7 +50,7 @@ public class IndividualEntitySchema implements Serializable {
     private String cpf;
 
     @NotEmpty(message = "É obrigatório informar um RG")
-    @Size(max = 13, min = 7, message = "RG deve ter de 7 até 13 dígitos")
+    @Size(max = 13, min = 1, message = "RG deve ter de 1 até 13 dígitos")
     @Column(name = "nr_rg", nullable = false, length = 13)
     private String rg;
 
@@ -60,13 +67,5 @@ public class IndividualEntitySchema implements Serializable {
     @PastOrPresent(message = "Forneça uma data de óbito válida")
     @Column(name = "dt_obito", nullable = true)
     private LocalDate deathDate;
-
-    @OneToOne(optional = true)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_mae"), name = "id_mae", referencedColumnName = "id_pessoa")
-    private IndividualEntitySchema motherPerson;
-
-    @OneToOne(optional = true)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_pai"), name = "id_pai", referencedColumnName = "id_pessoa")
-    private IndividualEntitySchema fatherPerson;
 
 }

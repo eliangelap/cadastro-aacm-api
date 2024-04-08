@@ -14,6 +14,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class AnswerSchema {
 
     @Id
     @Column(name = "nr_seqresposta")
+    @SequenceGenerator(name = "resposta_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idAnswer;
 
@@ -50,7 +52,7 @@ public class AnswerSchema {
     private QuestionItemSchema questionItem;
 
     @ManyToOne(optional = false, targetEntity = AutisticSchema.class)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa", foreignKey = @ForeignKey(name = "fk_autista_resposta"))
+    @JoinColumn(name = "id_autista", referencedColumnName = "id_autista", foreignKey = @ForeignKey(name = "fk_autista_resposta"))
     private AutisticSchema autistic;
 
     @Size(max = 500, message = "O tamanho máximo permitido para a resposta é 500 caracteres.")

@@ -11,19 +11,44 @@
     </parent>
     <groupId>br.org.amigosdoautista</groupId>
     <artifactId>cadastro-do-autista</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>cadastro-do-autista</name>
     <description>Formulário para Cadastro do Autista</description>
     <properties>
         <java.version>17</java.version>
     </properties>
-    <dependencies>
+    <packaging>${project.packaging}</packaging>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- <tomcat.scope>compile</tomcat.scope> -->
+                <project.packaging>jar</project.packaging>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!-- <tomcat.scope>provided</tomcat.scope> -->
+                <project.packaging>war</project.packaging>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>${tomcat.scope}</scope>
+        </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -68,7 +93,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

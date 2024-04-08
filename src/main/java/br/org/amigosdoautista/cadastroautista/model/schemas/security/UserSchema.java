@@ -17,7 +17,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -37,11 +38,12 @@ public class UserSchema implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "usuario_sequence", allocationSize = 1)
     @Column(name = "id_usuario")
     private Integer id;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_usuario"), name = "id_pessoa", referencedColumnName = "id_pessoa")
+    @OneToOne(optional = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_pessoafisica_usuario"), name = "id_pessoafisica", referencedColumnName = "id_pessoafisica")
     private IndividualEntitySchema individualEntity;
 
     @Column(name = "ds_email", nullable = false, length = 100, unique = true)
