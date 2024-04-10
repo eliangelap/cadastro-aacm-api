@@ -29,6 +29,6 @@ public class AutisticSchema {
 
     @OneToOne(optional = true)
     @JoinColumn(name = "id_responsavel", referencedColumnName = "id_pessoafisica", foreignKey = @ForeignKey(name = "fk_pessoafisica_responsavel"))
-    private IndividualEntitySchema guardianPerson; //
+    private IndividualEntitySchema guardianPerson;
 
 }
