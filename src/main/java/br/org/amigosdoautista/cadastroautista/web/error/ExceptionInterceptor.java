@@ -6,16 +6,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +26,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 
 import br.org.amigosdoautista.cadastroautista.util.LogUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,8 +73,6 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public final ResponseEntity<AppErrorSchema> handleNotFound(Exception ex, WebRequest request) {
-        ex.printStackTrace();
-
         return new ResponseEntity<>(getErrorSchema(ex, HttpStatus.NOT_FOUND, NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 
@@ -116,6 +118,19 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({
+            TokenExpiredException.class,
+            JWTVerificationException.class
+    })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected ResponseEntity<Object> handleNotLoggedIn(@NonNull BadCredentialsException ex,
+            WebRequest request) {
+        ex.printStackTrace();
+
+        return new ResponseEntity<>(getErrorSchema(ex, HttpStatus.UNAUTHORIZED, "Você não está autenticado."),
+                HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({
             ForbiddenException.class
     })
     @ResponseStatus(HttpStatus.FORBIDDEN)
@@ -140,30 +155,21 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleServletRequestBindingException(@NonNull ServletRequestBindingException ex,
             @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
-        ex.printStackTrace();
-
-        AppErrorSchema badRequestSchema = getErrorSchema(ex, HttpStatus.BAD_REQUEST, BAD_REQUEST);
-        return super.handleExceptionInternal(ex, badRequestSchema, headers, status, request);
+        return handleGenericInternalErrors(ex, headers, status, request);
     }
 
     @Override
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleHttpMessageNotReadable(@NonNull HttpMessageNotReadableException ex,
             @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
-        ex.printStackTrace();
-
-        AppErrorSchema badRequestSchema = getErrorSchema(ex, HttpStatus.BAD_REQUEST, BAD_REQUEST);
-        return super.handleExceptionInternal(ex, badRequestSchema, headers, status, request);
+        return handleGenericInternalErrors(ex, headers, status, request);
     }
 
     @Override
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleMissingServletRequestPart(@NonNull MissingServletRequestPartException ex,
             @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
-        ex.printStackTrace();
-
-        AppErrorSchema badRequestSchema = getErrorSchema(ex, HttpStatus.BAD_REQUEST, BAD_REQUEST);
-        return super.handleExceptionInternal(ex, badRequestSchema, headers, status, request);
+        return handleGenericInternalErrors(ex, headers, status, request);
     }
 
     @Override
@@ -171,14 +177,25 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
             @NonNull MissingServletRequestParameterException ex,
             @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
-        ex.printStackTrace();
-
-        AppErrorSchema badRequestSchema = getErrorSchema(ex, HttpStatus.BAD_REQUEST, BAD_REQUEST);
-        return super.handleExceptionInternal(ex, badRequestSchema, headers, status, request);
+        return handleGenericInternalErrors(ex, headers, status, request);
     }
 
     @Override
-    @Nullable
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ResponseEntity<Object> handleMissingPathVariable(@NonNull MissingPathVariableException ex,
+            @NonNull HttpHeaders headers,
+            @NonNull HttpStatusCode status, @NonNull WebRequest request) {
+        return handleGenericInternalErrors(ex, headers, status, request);
+    }
+
+    @Override
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ResponseEntity<Object> handleTypeMismatch(@NonNull TypeMismatchException ex, @NonNull HttpHeaders headers,
+            @NonNull HttpStatusCode status, @NonNull WebRequest request) {
+        return handleGenericInternalErrors(ex, headers, status, request);
+    }
+
+    @Override
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(@NonNull MethodArgumentNotValidException ex,
             @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
@@ -192,6 +209,14 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
 
         AppErrorSchema appErrorSchema = getErrorSchema(ex, errorsList, HttpStatus.BAD_REQUEST, BAD_REQUEST);
         return super.handleExceptionInternal(ex, appErrorSchema, headers, status, request);
+    }
+
+    private ResponseEntity<Object> handleGenericInternalErrors(@NonNull Exception ex,
+            @NonNull HttpHeaders headers, @NonNull HttpStatusCode status, @NonNull WebRequest request) {
+        ex.printStackTrace();
+
+        AppErrorSchema badRequestSchema = getErrorSchema(ex, HttpStatus.BAD_REQUEST, BAD_REQUEST);
+        return super.handleExceptionInternal(ex, badRequestSchema, headers, status, request);
     }
 
     private AppErrorSchema getErrorSchema(Exception ex, List<String> messages, HttpStatus httpStatus,

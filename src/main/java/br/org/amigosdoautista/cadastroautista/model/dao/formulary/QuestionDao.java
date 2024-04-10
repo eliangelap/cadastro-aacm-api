@@ -3,7 +3,7 @@ package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.QuestionType;
+import br.org.amigosdoautista.cadastroautista.model.types.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

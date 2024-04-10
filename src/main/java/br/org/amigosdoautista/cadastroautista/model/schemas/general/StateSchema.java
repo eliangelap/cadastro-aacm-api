@@ -30,11 +30,11 @@ public class StateSchema implements Serializable {
     @NotBlank(message = "Nome do estado é obrigatório")
     private String name;
 
-    @Column(name = "nr_ibge", nullable = false)
+    @Column(name = "nr_ibge", nullable = false, unique = true)
     @NotNull(message = "Código do IBGE é obrigatório")
     private Integer ibgeNumber;
 
-    @Column(name = "cd_uf", length = 2, nullable = false)
+    @Column(name = "cd_uf", length = 2, nullable = false, unique = true)
     @NotBlank(message = "UF é obrigatório")
     private String uf;
 

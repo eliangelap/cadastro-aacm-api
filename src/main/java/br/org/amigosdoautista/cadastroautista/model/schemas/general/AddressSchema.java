@@ -2,6 +2,7 @@ package br.org.amigosdoautista.cadastroautista.model.schemas.general;
 
 import java.io.Serializable;
 
+import br.org.amigosdoautista.cadastroautista.model.types.AddressType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

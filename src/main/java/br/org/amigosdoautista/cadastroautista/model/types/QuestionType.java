@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
+package br.org.amigosdoautista.cadastroautista.model.types;
 
 public enum QuestionType {
 

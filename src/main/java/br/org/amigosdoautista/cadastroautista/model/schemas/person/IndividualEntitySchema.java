@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.org.amigosdoautista.cadastroautista.model.types.SexType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -63,6 +64,10 @@ public class IndividualEntitySchema implements Serializable {
     @Column(name = "tp_sexo", nullable = false)
     @Enumerated(EnumType.STRING)
     private SexType sex;
+
+    @Size(max = 100, message = "Profissão deve ter no máximo 100 caracteres")
+    @Column(name = "ds_profissao", nullable = true, length = 100)
+    private String occupation;
 
     @PastOrPresent(message = "Forneça uma data de óbito válida")
     @Column(name = "dt_obito", nullable = true)

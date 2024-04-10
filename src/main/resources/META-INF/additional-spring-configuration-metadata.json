@@ -19,6 +19,16 @@
             "name": "token.issuer",
             "type": "java.lang.String",
             "description": "A description for 'token.issuer'"
+        },
+        {
+            "name": "api.ibge",
+            "type": "java.lang.String",
+            "description": "A description for 'api.ibge'"
+        },
+        {
+            "name": "api.ibge.states",
+            "type": "java.lang.String",
+            "description": "A description for 'api.ibge.states'"
         }
     ]
 }

@@ -1,6 +1,7 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.QuestionID;
+import br.org.amigosdoautista.cadastroautista.model.types.QuestionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

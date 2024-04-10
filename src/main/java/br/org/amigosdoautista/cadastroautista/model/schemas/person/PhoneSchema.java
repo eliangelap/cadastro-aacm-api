@@ -1,5 +1,6 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.person;
 
+import br.org.amigosdoautista.cadastroautista.model.types.PhoneType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
