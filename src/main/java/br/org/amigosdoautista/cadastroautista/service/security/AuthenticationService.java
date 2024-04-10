@@ -5,8 +5,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import br.org.amigosdoautista.cadastroautista.model.dto.security.JwtAuthenticationResponse;
-import br.org.amigosdoautista.cadastroautista.model.dto.security.SigninRequest;
+import br.org.amigosdoautista.cadastroautista.model.dao.security.JwtAuthenticationResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.security.SigninRequest;
 import br.org.amigosdoautista.cadastroautista.model.repository.security.UserRepository;
 import br.org.amigosdoautista.cadastroautista.model.schemas.security.UserSchema;
 import lombok.RequiredArgsConstructor;

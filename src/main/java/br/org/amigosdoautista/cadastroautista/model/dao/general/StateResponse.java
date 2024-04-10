@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.general;
+package br.org.amigosdoautista.cadastroautista.model.dao.general;
 
 import lombok.Data;
 

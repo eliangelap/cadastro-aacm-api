@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.amigosdoautista.cadastroautista.model.dto.general.StateResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.general.StateResponse;
 import br.org.amigosdoautista.cadastroautista.service.general.StateService;
 import lombok.RequiredArgsConstructor;
 

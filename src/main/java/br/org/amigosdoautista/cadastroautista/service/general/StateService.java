@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.org.amigosdoautista.cadastroautista.model.dto.general.StateResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.general.StateResponse;
 import br.org.amigosdoautista.cadastroautista.model.repository.general.StateRepository;
 import br.org.amigosdoautista.cadastroautista.model.schemas.general.StateSchema;
 import lombok.RequiredArgsConstructor;

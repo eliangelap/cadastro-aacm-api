@@ -45,11 +45,11 @@ values
     (1, 1, 'eliangela@eliangela.dev.br', '2024-03-30');
 
 merge into pes_pessoafisica
-    (id_pessoa, nm_pessoa, nr_cpf, nr_rg, dt_nascimento, tp_sexo) 
+    (id_pessoafisica, id_pessoa, nm_pessoa, nr_cpf, nr_rg, dt_nascimento, tp_sexo) 
 values
-    (1, 'Eliangela M P P', '01234567890', '0987654321', '1984-01-01', 'FEMALE');
+    (1, 1, 'Eliangela M P P', '01234567890', '0987654321', '1984-01-01', 'FEMALE');
 
 merge into seg_usuario
-    (id_usuario, id_pessoa, ds_email, ds_senha, in_cancelado, dt_cadastro) 
+    (id_usuario, id_pessoafisica, ds_email, ds_senha, in_cancelado, dt_cadastro) 
 values
     (1, 1, 'eliangela@eliangela.dev.br', '$2a$12$r2IFCsBfn2hMiWES.MuVy.s7L1fT699iQryITSArdydNNupqJD23C', 'FALSE', '2024-03-30');

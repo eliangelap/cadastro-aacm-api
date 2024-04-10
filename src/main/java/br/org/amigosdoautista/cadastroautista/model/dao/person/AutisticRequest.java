@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.person;
+package br.org.amigosdoautista.cadastroautista.model.dao.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

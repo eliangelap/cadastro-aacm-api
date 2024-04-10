@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.amigosdoautista.cadastroautista.model.dto.formulary.ActiveFormResponse;
-import br.org.amigosdoautista.cadastroautista.model.dto.formulary.FormRequest;
-import br.org.amigosdoautista.cadastroautista.model.dto.formulary.ShortFormResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.formulary.ActiveFormResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.formulary.FormRequest;
+import br.org.amigosdoautista.cadastroautista.model.dao.formulary.ShortFormResponse;
 import br.org.amigosdoautista.cadastroautista.service.formulary.FormService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -13,7 +13,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import br.org.amigosdoautista.cadastroautista.model.dto.security.JwtAuthenticationResponse;
+import br.org.amigosdoautista.cadastroautista.model.dao.security.JwtAuthenticationResponse;
 
 @Service
 public class JwtService {

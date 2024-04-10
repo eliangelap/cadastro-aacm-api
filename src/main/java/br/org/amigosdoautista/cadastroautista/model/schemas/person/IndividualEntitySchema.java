@@ -68,4 +68,12 @@ public class IndividualEntitySchema implements Serializable {
     @Column(name = "dt_obito", nullable = true)
     private LocalDate deathDate;
 
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id_mae", referencedColumnName = "id_pessoafisica", foreignKey = @ForeignKey(name = "fk_pessoafisica_mae"))
+    private IndividualEntitySchema motherPerson;
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id_pai", referencedColumnName = "id_pessoafisica", foreignKey = @ForeignKey(name = "fk_pessoafisica_pai"))
+    private IndividualEntitySchema fatherPerson;
+
 }

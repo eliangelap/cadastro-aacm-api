@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,6 +20,6 @@ public class ActiveVersionResponse {
     private LocalDateTime creationDateTime;
 
     @Builder.Default
-    private List<TopicDTO> topics = new ArrayList<>();
+    private List<TopicDao> topics = new ArrayList<>();
 
 }

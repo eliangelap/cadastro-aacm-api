@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopicDTO {
+public class TopicDao {
 
     @NotEmpty(message = "É obrigatório informar um título")
     private String name;
@@ -25,6 +25,6 @@ public class TopicDTO {
     private Integer sequence;
 
     @Builder.Default
-    private List<QuestionDTO> questions = new ArrayList<>();
+    private List<QuestionDao> questions = new ArrayList<>();
 
 }

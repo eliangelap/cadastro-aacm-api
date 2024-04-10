@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,6 @@ public class FormRequest {
 
     @Builder.Default
     @NotEmpty(message = "É obrigatório informar uma lista de tópicos")
-    private List<TopicDTO> topics = new ArrayList<>();
+    private List<TopicDao> topics = new ArrayList<>();
 
 }

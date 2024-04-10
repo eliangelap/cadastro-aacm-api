@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionItemDTO {
+public class QuestionItemDao {
 
     private String description;
 

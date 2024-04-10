@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.security;
+package br.org.amigosdoautista.cadastroautista.model.dao.security;
 
 import java.util.Date;
 

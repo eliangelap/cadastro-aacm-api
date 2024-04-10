@@ -1,4 +1,4 @@
-package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
+package br.org.amigosdoautista.cadastroautista.model.dao.formulary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionDTO {
+public class QuestionDao {
 
     private String description;
     private String additionalDescription;
@@ -22,6 +22,6 @@ public class QuestionDTO {
     private Boolean mandatory;
 
     @Builder.Default
-    private List<QuestionItemDTO> questionItems = new ArrayList<>();
+    private List<QuestionItemDao> questionItems = new ArrayList<>();
 
 }
