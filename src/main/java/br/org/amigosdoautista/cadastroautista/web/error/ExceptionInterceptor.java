@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -100,6 +101,20 @@ public class ExceptionInterceptor extends ResponseEntityExceptionHandler {
                 .map(ConstraintViolation::getMessage)
                 .filter(Objects::nonNull)
                 .toList();
+
+        return new ResponseEntity<>(getErrorSchema(ex, errorsList, HttpStatus.BAD_REQUEST, BAD_REQUEST),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({
+            DataIntegrityViolationException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public final ResponseEntity<AppErrorSchema> handleDuplicateKeysErrors(
+            DataIntegrityViolationException ex, WebRequest request) {
+        ex.printStackTrace();
+
+        List<String> errorsList = List.of("Cadastro duplicado: " + ex.getMostSpecificCause().getMessage());
 
         return new ResponseEntity<>(getErrorSchema(ex, errorsList, HttpStatus.BAD_REQUEST, BAD_REQUEST),
                 HttpStatus.BAD_REQUEST);

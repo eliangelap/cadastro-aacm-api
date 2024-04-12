@@ -24,7 +24,7 @@ public class CitySchema implements Serializable {
 
     @Id
     @Column(name = "id_municipio")
-    @SequenceGenerator(name = "municipio_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "municipio_sequence", allocationSize = 1, initialValue = 2)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
@@ -33,7 +33,7 @@ public class CitySchema implements Serializable {
     @NotBlank(message = "Nome do município é obrigatório")
     private String name;
 
-    @Column(name = "nr_ibge", nullable = false)
+    @Column(name = "nr_ibge", nullable = false, unique = true)
     @NotNull(message = "Código do IBGE é obrigatório")
     private Integer ibgeNumber;
 

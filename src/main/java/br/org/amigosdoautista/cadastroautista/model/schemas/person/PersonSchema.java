@@ -24,7 +24,7 @@ import lombok.Data;
 public class PersonSchema implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "pessoa_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "pessoa_sequence", allocationSize = 1, initialValue = 2)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_pessoa")
     private Integer id;

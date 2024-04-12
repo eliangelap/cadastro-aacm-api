@@ -38,7 +38,7 @@ public class UserSchema implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "usuario_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "usuario_sequence", allocationSize = 1, initialValue = 2)
     @Column(name = "id_usuario")
     private Integer id;
 

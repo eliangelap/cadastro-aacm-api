@@ -18,7 +18,7 @@ import br.org.amigosdoautista.cadastroautista.model.dao.security.JwtAuthenticati
 @Service
 public class JwtService {
 
-    private static final Long EXPIRATION_MILLIS = (1000 * 60 * 60L);
+    private static final Long EXPIRATION_MILLIS = (1000 * 60 * 60 * 24L);
 
     @Value("${token.signing.key}")
     private String jwtSigningKey;

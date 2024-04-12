@@ -31,7 +31,7 @@ public class IndividualEntitySchema implements Serializable {
 
     @Id
     @Column(name = "id_pessoafisica")
-    @SequenceGenerator(name = "pessoafisica_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "pessoafisica_sequence", allocationSize = 1, initialValue = 2)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idIndividualEntity;
 
