@@ -24,6 +24,7 @@ public class TopicDao {
     @Positive(message = "É obrigatório informar um número maior que zero para a sequência")
     private Integer sequence;
 
+    @NotEmpty(message = "É obrigatório informar pelo menos uma questão")
     @Builder.Default
     private List<QuestionDao> questions = new ArrayList<>();
 
