@@ -29,10 +29,12 @@ import lombok.Data;
 @Table(name = "pes_pessoafisica")
 public class IndividualEntitySchema implements Serializable {
 
+    private static final String PES_PESSOAFISICA_SEQ = "pes_pessoafisica_seq";
+
     @Id
     @Column(name = "id_pessoafisica")
-    @SequenceGenerator(name = "pessoafisica_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = PES_PESSOAFISICA_SEQ, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = PES_PESSOAFISICA_SEQ)
     private Integer idIndividualEntity;
 
     @OneToOne

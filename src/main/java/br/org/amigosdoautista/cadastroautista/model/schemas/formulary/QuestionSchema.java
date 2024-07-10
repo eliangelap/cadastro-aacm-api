@@ -1,6 +1,5 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.QuestionID;
 import br.org.amigosdoautista.cadastroautista.model.types.QuestionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,9 +9,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -25,23 +22,19 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cad_questao")
-@IdClass(QuestionID.class)
 public class QuestionSchema {
 
-    @Id
-    @ManyToOne(optional = false)
-    @JoinColumns(value = {
-            @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulario"),
-            @JoinColumn(name = "id_versao", referencedColumnName = "id_versao"),
-            @JoinColumn(name = "id_topico", referencedColumnName = "id_topico")
-    }, foreignKey = @ForeignKey(name = "fk_questao_topico"))
-    private TopicSchema topic;
+    private static final String CAD_QUESTAO_SEQ = "cad_questao_seq";
 
     @Id
     @Column(name = "id_questao")
-    @SequenceGenerator(name = "questao_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = CAD_QUESTAO_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CAD_QUESTAO_SEQ)
     private Integer idQuestion;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_topico", referencedColumnName = "id_topico", foreignKey = @ForeignKey(name = "fk_questao_topico"))
+    private TopicSchema topic;
 
     @Column(name = "tp_questao", nullable = false)
     @NotNull(message = "É obrigatório selecionar o tipo de questão")

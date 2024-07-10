@@ -36,9 +36,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "seg_usuario")
 public class UserSchema implements UserDetails {
 
+    private static final String SEG_USUARIO_SEQ = "seg_usuario_seq";
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "usuario_sequence", allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEG_USUARIO_SEQ)
+    @SequenceGenerator(name = SEG_USUARIO_SEQ, allocationSize = 1, initialValue = 2)
     @Column(name = "id_usuario")
     private Integer id;
 

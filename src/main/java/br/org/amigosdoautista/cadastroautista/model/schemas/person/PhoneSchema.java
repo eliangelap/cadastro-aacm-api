@@ -21,10 +21,12 @@ import lombok.Data;
 @Table(name = "pes_telefone")
 public class PhoneSchema {
 
+    private static final String PES_TELEFONE_SEQ = "pes_telefone_seq";
+
     @Id
     @Column(name = "id_telefone")
-    @SequenceGenerator(name = "telefone_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = PES_TELEFONE_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = PES_TELEFONE_SEQ)
     private Integer id;
 
     @ManyToOne(optional = false)

@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.TopicSchema;
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.VersionSchema;
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.TopicID;
 
 @Repository
-public interface TopicRepository extends JpaRepository<TopicSchema, TopicID> {
+public interface TopicRepository extends JpaRepository<TopicSchema, Integer> {
 
     List<TopicSchema> findByVersion(VersionSchema version);
 

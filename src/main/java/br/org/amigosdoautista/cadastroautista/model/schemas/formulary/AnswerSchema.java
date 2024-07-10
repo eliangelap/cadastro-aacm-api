@@ -2,7 +2,6 @@ package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
 import java.time.LocalDateTime;
 
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.AnswerID;
 import br.org.amigosdoautista.cadastroautista.model.schemas.person.AutisticSchema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,9 +9,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -22,33 +19,22 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cad_resposta")
-@IdClass(AnswerID.class)
 public class AnswerSchema {
 
-    @Id
-    @ManyToOne(optional = false)
-    @JoinColumns(value = {
-            @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulario"),
-            @JoinColumn(name = "id_versao", referencedColumnName = "id_versao"),
-            @JoinColumn(name = "id_topico", referencedColumnName = "id_topico"),
-            @JoinColumn(name = "id_questao", referencedColumnName = "id_questao")
-    }, foreignKey = @ForeignKey(name = "fk_questao_resposta"))
-    private QuestionSchema question;
+    private static final String CAD_RESPOSTA_SEQ = "cad_resposta_seq";
 
     @Id
-    @Column(name = "nr_seqresposta")
-    @SequenceGenerator(name = "resposta_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_resposta")
+    @SequenceGenerator(name = CAD_RESPOSTA_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CAD_RESPOSTA_SEQ)
     private Integer idAnswer;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_questao", referencedColumnName = "id_questao", foreignKey = @ForeignKey(name = "fk_questao_resposta"))
+    private QuestionSchema question;
+
     @ManyToOne(optional = true, targetEntity = QuestionItemSchema.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulario"),
-            @JoinColumn(name = "id_versao", referencedColumnName = "id_versao"),
-            @JoinColumn(name = "id_topico", referencedColumnName = "id_topico"),
-            @JoinColumn(name = "id_questao", referencedColumnName = "id_questao"),
-            @JoinColumn(name = "id_item", referencedColumnName = "id_item", nullable = true)
-    }, foreignKey = @ForeignKey(name = "fk_item_resposta"))
+    @JoinColumn(name = "id_item", referencedColumnName = "id_item", nullable = true, foreignKey = @ForeignKey(name = "fk_item_resposta"))
     private QuestionItemSchema questionItem;
 
     @ManyToOne(optional = false, targetEntity = AutisticSchema.class)

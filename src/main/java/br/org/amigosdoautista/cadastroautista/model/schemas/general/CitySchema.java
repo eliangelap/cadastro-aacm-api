@@ -22,10 +22,12 @@ import lombok.Data;
 @Table(name = "ger_municipio")
 public class CitySchema implements Serializable {
 
+    private static final String GER_MUNICIPIO_SEQ = "ger_municipio_seq";
+
     @Id
     @Column(name = "id_municipio")
-    @SequenceGenerator(name = "municipio_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = GER_MUNICIPIO_SEQ, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GER_MUNICIPIO_SEQ)
     private Integer id;
 
     @Column(name = "nm_municipio", length = 100, nullable = false)

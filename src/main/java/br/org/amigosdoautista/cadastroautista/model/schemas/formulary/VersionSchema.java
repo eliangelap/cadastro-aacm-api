@@ -2,14 +2,12 @@ package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
 import java.time.LocalDateTime;
 
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.VersionID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
@@ -19,19 +17,19 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cad_versao")
-@IdClass(VersionID.class)
 public class VersionSchema {
 
-    @Id
-    @ManyToOne(optional = false)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_versao_formulario"), name = "id_formulario", referencedColumnName = "id_formulario")
-    private FormSchema form;
+    private static final String CAD_VERSAO_SEQ = "cad_versao_seq";
 
     @Id
     @Column(name = "id_versao")
-    @SequenceGenerator(name = "versao_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = CAD_VERSAO_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CAD_VERSAO_SEQ)
     private Integer idVersion;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_versao_formulario"), name = "id_formulario", referencedColumnName = "id_formulario")
+    private FormSchema form;
 
     @Column(name = "in_cancelado", nullable = false)
     private Boolean canceled = Boolean.FALSE;

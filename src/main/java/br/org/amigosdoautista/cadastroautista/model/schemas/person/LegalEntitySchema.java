@@ -22,10 +22,12 @@ import lombok.Data;
 @Table(name = "pes_pessoajuridica")
 public class LegalEntitySchema implements Serializable {
 
+    private static final String PES_PESSOAJURIDICA_SEQ = "pes_pessoajuridica_seq";
+
     @Id
     @Column(name = "id_pessoajuridica")
-    @SequenceGenerator(name = "pessoajuridica_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = PES_PESSOAJURIDICA_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = PES_PESSOAJURIDICA_SEQ)
     private Integer idLegalEntity;
 
     @OneToOne(optional = false)

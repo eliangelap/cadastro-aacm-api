@@ -7,13 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.FormSchema;
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.VersionSchema;
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.VersionID;
-
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VersionRepository extends JpaRepository<VersionSchema, VersionID> {
+public interface VersionRepository extends JpaRepository<VersionSchema, Integer> {
 
     VersionSchema findByCanceled(Boolean canceled);
 

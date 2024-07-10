@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.ActiveFormResponse;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.ActiveVersionResponse;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.FormRequest;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.QuestionDao;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.QuestionItemDao;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.ShortFormResponse;
-import br.org.amigosdoautista.cadastroautista.model.dao.formulary.TopicDao;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.ActiveFormResponse;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.ActiveVersionResponse;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.FormRequest;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.QuestionDTO;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.QuestionItemDTO;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.ShortFormResponse;
+import br.org.amigosdoautista.cadastroautista.model.dto.formulary.TopicDTO;
 import br.org.amigosdoautista.cadastroautista.model.repository.formulary.FormRepository;
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.FormSchema;
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.QuestionSchema;
@@ -82,20 +82,20 @@ public class FormService {
         // Listando os tópicos da versão
         topicService.listTopicsByVersion(version)
                 .forEach(topic -> {
-                    TopicDao topicDTO = mapper.map(topic, TopicDao.class);
+                    TopicDTO topicDTO = mapper.map(topic, TopicDTO.class);
                     activeVersion.getTopics().add(topicDTO);
 
                     // Listando as questões
                     questionService.listByTopic(topic)
                             .forEach(question -> {
-                                QuestionDao questionDTO = mapper.map(question, QuestionDao.class);
+                                QuestionDTO questionDTO = mapper.map(question, QuestionDTO.class);
                                 topicDTO.getQuestions().add(questionDTO);
 
                                 // Listando as questão itens
                                 questionItemService.listByQuestion(question)
                                         .forEach(questionItem -> {
-                                            QuestionItemDao questionItemDTO = mapper.map(questionItem,
-                                                    QuestionItemDao.class);
+                                            QuestionItemDTO questionItemDTO = mapper.map(questionItem,
+                                                    QuestionItemDTO.class);
                                             questionDTO.getQuestionItems().add(questionItemDTO);
                                         });
                             });

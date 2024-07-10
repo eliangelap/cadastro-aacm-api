@@ -9,8 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import br.org.amigosdoautista.cadastroautista.model.dao.general.IbgeCity;
-import br.org.amigosdoautista.cadastroautista.model.dao.general.StateResponse;
+import br.org.amigosdoautista.cadastroautista.model.dto.general.IbgeCityDTO;
+import br.org.amigosdoautista.cadastroautista.model.dto.general.StateResponse;
 import br.org.amigosdoautista.cadastroautista.model.repository.general.StateRepository;
 import br.org.amigosdoautista.cadastroautista.model.schemas.general.StateSchema;
 import br.org.amigosdoautista.cadastroautista.web.error.NotFoundException;
@@ -36,13 +36,13 @@ public class StateService {
         return stateResponses;
     }
 
-    public List<IbgeCity> listAllCitiesFromState(String uf) {
+    public List<IbgeCityDTO> listAllCitiesFromState(String uf) {
         StateSchema stateSchema = stateRepository.findByUf(uf).orElseThrow(NotFoundException::new);
 
         String url = ibgeStatesApiUrl.replace("{UF}", String.valueOf(stateSchema.getIbgeNumber()));
 
         RestTemplate restTemplate = new RestTemplate();
-        return List.of(restTemplate.getForObject(url, IbgeCity[].class));
+        return List.of(restTemplate.getForObject(url, IbgeCityDTO[].class));
     }
 
 }

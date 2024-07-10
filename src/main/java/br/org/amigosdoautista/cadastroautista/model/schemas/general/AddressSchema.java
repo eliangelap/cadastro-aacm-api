@@ -25,9 +25,11 @@ import lombok.Data;
 @Table(name = "ger_endereco")
 public class AddressSchema implements Serializable {
 
+    private static final String GER_ENDERECO_SEQ = "ger_endereco_seq";
+
     @Id
-    @SequenceGenerator(name = "endereco_sequence", allocationSize = 1, initialValue = 2)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = GER_ENDERECO_SEQ, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GER_ENDERECO_SEQ)
     @Column(name = "id_endereco")
     private Integer id;
 

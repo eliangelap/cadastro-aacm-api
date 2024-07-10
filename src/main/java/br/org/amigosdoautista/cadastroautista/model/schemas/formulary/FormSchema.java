@@ -16,9 +16,11 @@ import lombok.Data;
 @Table(name = "cad_formulario")
 public class FormSchema {
 
+    private static final String CAD_FORMULARIO_SEQ = "cad_formulario_seq";
+
     @Id
-    @SequenceGenerator(name = "formulario_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = CAD_FORMULARIO_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CAD_FORMULARIO_SEQ)
     @Column(name = "id_formulario")
     private Integer id;
 

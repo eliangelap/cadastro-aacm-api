@@ -19,10 +19,12 @@ import lombok.Data;
 @Table(name = "ger_estado")
 public class StateSchema implements Serializable {
 
+    private static final String GER_ESTADO_SEQ = "ger_estado_seq";
+
     @Id
     @Column(name = "id_estado")
-    @SequenceGenerator(name = "estado_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = GER_ESTADO_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GER_ESTADO_SEQ)
     private Integer id;
 
     @Column(name = "nm_estado", length = 50, nullable = false)

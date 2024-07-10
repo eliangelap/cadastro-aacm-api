@@ -5,12 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.QuestionSchema;
 import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.TopicSchema;
-import br.org.amigosdoautista.cadastroautista.model.schemas.formulary.id.QuestionID;
-
 import java.util.List;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<QuestionSchema, QuestionID> {
+public interface QuestionRepository extends JpaRepository<QuestionSchema, Integer> {
 
     List<QuestionSchema> findByTopic(TopicSchema topic);
 

@@ -17,10 +17,12 @@ import lombok.Data;
 @Table(name = "pes_autista")
 public class AutisticSchema {
 
+    private static final String PES_AUTISTA_SEQ = "pes_autista_seq";
+
     @Id
     @Column(name = "id_autista")
-    @SequenceGenerator(name = "autista_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = PES_AUTISTA_SEQ, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = PES_AUTISTA_SEQ)
     private Integer idAutistic;
 
     @OneToOne(optional = false)
