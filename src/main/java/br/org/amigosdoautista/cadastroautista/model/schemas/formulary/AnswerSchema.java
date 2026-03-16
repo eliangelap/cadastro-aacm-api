@@ -1,8 +1,9 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.person.AutisticSchema;
+import br.org.amigosdoautista.cadastroautista.util.DateTimeUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -46,6 +47,6 @@ public class AnswerSchema {
     private String answerDescription;
 
     @Column(name = "dt_resposta", nullable = false)
-    private LocalDateTime answerDateTime = LocalDateTime.now();
+    private ZonedDateTime answerDateTime = DateTimeUtil.getCurrentDateTime();
 
 }

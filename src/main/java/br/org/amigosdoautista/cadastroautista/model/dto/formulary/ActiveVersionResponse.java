@@ -1,6 +1,6 @@
 package br.org.amigosdoautista.cadastroautista.model.dto.formulary;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class ActiveVersionResponse {
 
     private Integer idVersion;
     private Boolean canceled;
-    private LocalDateTime creationDateTime;
+    private ZonedDateTime creationDateTime;
 
     @Builder.Default
     private List<TopicDTO> topics = new ArrayList<>();

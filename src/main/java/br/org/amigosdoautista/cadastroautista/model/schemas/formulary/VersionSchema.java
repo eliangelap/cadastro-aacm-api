@@ -1,7 +1,8 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.formulary;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
+import br.org.amigosdoautista.cadastroautista.util.DateTimeUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -35,6 +36,6 @@ public class VersionSchema {
     private Boolean canceled = Boolean.FALSE;
 
     @Column(name = "dt_criacao", nullable = false)
-    private LocalDateTime creationDateTime = LocalDateTime.now();
+    private ZonedDateTime creationDateTime = DateTimeUtil.getCurrentDateTime();
 
 }

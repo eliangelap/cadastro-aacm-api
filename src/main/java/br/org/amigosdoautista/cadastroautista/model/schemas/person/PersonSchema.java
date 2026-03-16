@@ -1,9 +1,10 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.person;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.general.AddressSchema;
+import br.org.amigosdoautista.cadastroautista.util.DateTimeUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -41,6 +42,6 @@ public class PersonSchema implements Serializable {
     private String email;
 
     @Column(name = "dt_cadastro", nullable = false)
-    private LocalDateTime creationDateTime = LocalDateTime.now();
+    private ZonedDateTime creationDateTime = DateTimeUtil.getCurrentDateTime();
 
 }

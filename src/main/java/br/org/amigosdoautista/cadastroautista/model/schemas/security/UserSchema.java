@@ -1,7 +1,7 @@
 package br.org.amigosdoautista.cadastroautista.model.schemas.security;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.org.amigosdoautista.cadastroautista.model.schemas.person.IndividualEntitySchema;
+import br.org.amigosdoautista.cadastroautista.util.DateTimeUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -64,7 +65,7 @@ public class UserSchema implements UserDetails {
 
     @Builder.Default
     @Column(name = "dt_cadastro", nullable = false)
-    private LocalDateTime creationDateTime = LocalDateTime.now();
+    private ZonedDateTime creationDateTime = DateTimeUtil.getCurrentDateTime();
 
     @Column(name = "dt_expiracao", nullable = true)
     private LocalDate expirationDate;

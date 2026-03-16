@@ -10,14 +10,13 @@ import lombok.Data;
 public class UserDTO {
 
     private Integer id;
-    private String name;
-    private String cpf;
+    private String individualEntityName;
+    private String individualEntityCpf;
+    private String individualEntityRg;
     private String email;
-    private String rg;
-    private AddressDTO address;
     private LocalDate birthDate;
     private SexType sex;
-    private LocalDate deathDate;
     private String occupation;
+    private AddressDTO address;
 
 }
